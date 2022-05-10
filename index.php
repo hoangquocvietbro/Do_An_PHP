@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    hello word, viet
+    <?php echo("xin chao cac ban");?>
 </body>
 </html>
