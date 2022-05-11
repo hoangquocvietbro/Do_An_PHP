@@ -1,7 +1,7 @@
 <?php
-difine('HOST','localhost');
-difine('USERNAME','root');
-difine('PASSWORD','');
+define('HOST','localhost');
+define('USERNAME','root');
+define('PASSWORD','');
 define("DATABASE","db_cookies_restaurant");
 
 
