@@ -18,7 +18,7 @@ require_once ('../../db/dbhelper.php');
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<ul class="nav nav-tabs">
+	<ul class=" nav-tabs">
 	  <li class="nav-item">
 	    <a class="nav-link active" href="#">Quản Lý Danh Mục</a>
 	  </li>
