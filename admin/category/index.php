@@ -1,11 +1,26 @@
 <?php
 require_once ('../../db/dbhelper.php');
-
+//tìm kiếm
 $search = '';
 
 if(isset($_GET['search'])){
     $search = $_GET['search'];
 }
+
+//phân trang
+$limit = 10;
+$page= 1;
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+}
+$firstIndex = ($page-1)*$limit;
+if($page<1) $page =1;
+$sql_count = "select count(*) from category where name like '%$search%'";
+$countResult = executeSingleResult($sql_count);
+$count = $countResult['count(*)'];
+$number = ceil($count/$limit);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,15 +92,15 @@ if(isset($_GET['search'])){
 						</tr>
 					</thead>
 					<tbody>
-                        <?php
+<?php
 //Lay danh sach danh muc tu database
-$sql          = "select * from category where name like '%$search%'";
+$andSearch         = "and name like '%$search%'";
+$sql = 'select * from category where 1 '.$andSearch.'limit '.$firstIndex.','.$limit;
 $categoryList = executeResult($sql);
 
-$index = 1;
 foreach ($categoryList as $item) {
 	echo '<tr>
-				<td>'.($index++).'</td>
+				<td>'.(($firstIndex++ + 1)).'</td>
 				<td>'.$item['name'].'</td>
 				<td>
 					<a href="add.php?id='.$item['id'].'"><button class="btn btn-edit">Sửa</button></a>
@@ -99,6 +114,23 @@ foreach ($categoryList as $item) {
 ?>
                     </tbody>
                 </table>
+                <ul class="pagination">
+                    
+<?php
+    if($page>1) echo '<li class="page-item"><a href="?page='.($page-1).'&search='.$search.'" class="page-link">Previous</a></li>';
+
+    $avaiablePage=[1,$page,$number];
+    for($i = 0;$i<$number;$i++){
+        if(!in_array($i+1,$avaiablePage)) continue;
+    if($page == $i+1)
+        echo '<li class="page-item page-active"><a href="?page='.($i+1).'&search='.$search.'" class="page-link">'.($i+1).'</a></li>';
+    else 
+    echo '<li class="page-item"><a href="?page='.($i+1).'&search='.$search.'" class="page-link">'.($i+1).'</a></li>';
+    }
+
+    if($page<$number) echo '<li class="page-item"><a href="?page='.($page+1).'&search='.$search.'" class="page-link">Next</a></li>'
+?>
+                </ul>
             </div>
         </div>
     </div>
