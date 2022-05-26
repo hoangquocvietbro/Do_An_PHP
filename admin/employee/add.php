@@ -1,7 +1,7 @@
 <?php
 require_once ('../../db/dbhelper.php');
 
-$id = $name = $user_name = $password = $phone = $address = $sale_level = '';
+$id = $name = $user_name = $password = $phone = $salary = $role = '';
 if (!empty($_POST)) {
     if (isset($_POST['id'])) {
 		$id = $_POST['id'];
@@ -18,20 +18,20 @@ if (!empty($_POST)) {
     if (isset($_POST['phone'])) {
 		$phone = $_POST['phone'];
 	}
-	if (isset($_POST['address'])) {
-		$address = $_POST['address'];
+	if (isset($_POST['salary'])) {
+		$salary = $_POST['salary'];
 	}
-    if (isset($_POST['sale_level'])) {
-		$sale_level = $_POST['sale_level'];
+    if (isset($_POST['role'])) {
+		$role = $_POST['role'];
 	}
 
 	if (!empty($name)) {
 		$created_at = $updated_at = date('Y-m-d H:s:i');
 		//Luu vao database
 		if ($id == '') {
-			$sql = 'insert into customer(name, user_name, password, phone, address, sale_level, created_at, updated_at) values ("'.$name.'","'.$user_name.'","'.$password.'","'.$phone.'","'.$address.'","'.$sale_level.'","'.$created_at.'", "'.$updated_at.'")';
+			$sql = 'insert into employee(name, user_name, password, phone, salary, role, created_at, updated_at) values ("'.$name.'","'.$user_name.'","'.$password.'","'.$phone.'","'.$salary.'","'.$role.'","'.$created_at.'", "'.$updated_at.'")';
 		} else {
-			$sql = 'update customer set name = "'.$name.'", user_name = "'.$user_name.'", password = "'.$password.'", phone = "'.$phone.'", address = "'.$address.'", sale_level = "'.$sale_level.'", updated_at = "'.$updated_at.'" where id = '.$id;
+			$sql = 'update employee set name = "'.$name.'", user_name = "'.$user_name.'", password = "'.$password.'", phone = "'.$phone.'", salary = "'.$salary.'", role = "'.$role.'", updated_at = "'.$updated_at.'" where id = '.$id;
 		}
 
 		execute($sql);
@@ -43,15 +43,15 @@ if (!empty($_POST)) {
 
 if (isset($_GET['id'])) {
 	$id       = $_GET['id'];
-	$sql      = 'select * from customer where id = '.$id;
-	$customer = executeSingleResult($sql);
-    if ($customer != null) {
-		$name = $customer['name'];
-		$user_name = $customer['user_name'];
-		$password = $customer['password'];
-		$phone = $customer['phone'];
-		$address = $customer['address'];
-        $sale_level = $customer['sale_level'];
+	$sql      = 'select * from employee where id = '.$id;
+	$employee = executeSingleResult($sql);
+    if ($employee != null) {
+		$name = $employee['name'];
+		$user_name = $employee['user_name'];
+		$password = $employee['password'];
+		$phone = $employee['phone'];
+		$salary = $employee['salary'];
+        $role = $employee['role'];
 	}
 }
 ?>
@@ -91,13 +91,13 @@ if (isset($_GET['id'])) {
             </ul>
         </div>
         <div class="page-wapper">
-            <div class="page-path"><a href="index.php">Quản lý khách hàng</a>/ <a href=""><?php if($id=='') echo 'Thêm ';else echo "Sửa " ?>khách hàng</a></div>
-            <div class="page-title"><h1><?php if($id=='') echo 'Thêm ';else echo "Sửa " ?>khách hàng</h1></div>
+            <div class="page-path"><a href="index.php">Quản lý nhân viên</a>/ <a href=""><?php if($id=='') echo 'Thêm ';else echo "Sửa " ?>nhân viên</a></div>
+            <div class="page-title"><h1><?php if($id=='') echo 'Thêm ';else echo "Sửa " ?>nhân viên</h1></div>
             <div class="panel-body">
 				<form method="post">
                     <input type="text" name="id" value="<?=$id?>" hidden="true">
 					<div class="form-group">
-					  <label for="name">Tên khách hàng:</label><br>
+					  <label for="name">Tên nhân viên:</label><br>
 					  <input required="true" type="text" class="form-control" id="name" name="name" value="<?=$name?>">
 					</div>
                     <div class="form-group">
@@ -113,27 +113,27 @@ if (isset($_GET['id'])) {
 					  <input required="true" type="text" class="form-control" id="phone" name="phone" value="<?=$phone?>">
 					</div>
                     <div class="form-group">
-					  <label for="address">Địa chỉ:</label><br>
-					  <input required="true" type="text" class="form-control" id="address" name="address" value="<?=$address?>">
+					  <label for="salary">Lương:</label><br>
+					  <input required="true" type="text" class="form-control" id="salary" name="salary" value="<?=$salary?>">
 					</div>
                     <div class="form-group">
-					  <label for="sale_level">Cấp độ kuyến mãi:</label><br>
-					  <select class="form-control" name = "sale_level">
-					  <option>--lua chon sale_level--</option>
+					  <label for="role">Chức vụ:</label><br>
+					  <select class="form-control" name = "role">
+					  <option>--lua chon chuc vụ--</option>
 
 					  <?php 
-					  if($sale_level==1){
-                        echo '<option selected value =1>3%</option>';
-                        echo '<option value = 2>5%</option>';
+					  if($role==1){
+                        echo '<option selected value =1>Quản lý</option>';
+                        echo '<option value = 2>Nhân viên</option>';
                       }
 					  
-					  else if($sale_level == 2) {
-                        echo '<option  value = "1">3%</option>';
-                        echo '<option selected value ="2">5%</option>';
+					  else if($role == 2) {
+                        echo '<option  value = "1">Quản lý</option>';
+                        echo '<option selected value ="2">Nhân viên</option>';
                         }
                       else{
-                        echo '<option value = "1">3%</option>';
-                        echo '<option value = "2">5%</option>';
+                        echo '<option value = "1">Quản lý</option>';
+                        echo '<option value = "2">Nhân viên</option>';
                       }
 					  ?>
 

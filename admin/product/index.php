@@ -1,91 +1,157 @@
 <?php
 require_once ('../../db/dbhelper.php');
+//tìm kiếm
+$search = '';
+
+if(isset($_GET['search'])){
+    $search = $_GET['search'];
+}
+
+//phân trang
+$limit = 10;
+if(isset($_GET['choose'])){
+    $limit = $_GET['choose'];
+}
+
+$page= 1;
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+}
+$firstIndex = ($page-1)*$limit;
+if($page<1) $page =1;
+$sql_count = "select count(*) from product where name like '%$search%'";
+$countResult = executeSingleResult($sql_count);
+$count = $countResult['count(*)'];
+$number = ceil($count/$limit);
+
+
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Quản Lý Danh Mục</title>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="../font/fontawesome-free-6.1.1-web/css/all.css">
 </head>
 <body>
-	<ul class="nav nav-tabs">
-	  <li class="nav-item">
-	    <a class="nav-link active" href="#">Quản Lý Danh Mục</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="../product/">Quản Lý Sản Phẩm</a>
-	  </li>
-	</ul>
-
-	<div class="container">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h2 class="text-center">Quản Lý Danh Mục</h2>
-			</div>
-			<div class="panel-body">
-				<a href="add.php">
-					<button class="btn btn-success" style="margin-bottom: 15px;">Thêm Danh Mục</button>
-				</a>
-				<table class="table table-bordered table-hover">
-					<thead>
+    <header class="header">
+        <div class="header__brand"><b><i>Cookies & Confections shop </i></b>| Admin Panel</div>
+        <ul class="header__dropdown">
+            <li><div class="name">Discounted Price</div><img src="../default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg" alt="">
+                <ul class="header__sub-dropdown">
+                    <li><a href=""><i class="fa-solid fa-pen-to-square"></i>Sửa thông tin</a></li>
+                     <li><a href=""><i class="fa fa-sign-out fa-fw"></i>  Đăng xuất</a></li>
+                </ul>
+            </li>  
+        </ul>
+    </header>
+    <div class="container">
+        <div class="sidebar">
+        <ul class="sidebar__nav">
+                <li><a href="../category"><i class="fa fa-barcode fa-fw"></i> Danh mục</a></li>
+                <li><a href="../product"><i class="fa-solid fa-cookie-bite"></i> Sản Phẩm</a></li>
+                <li><a href="../order"><i class="fa fa-list-alt fa-fw"></i> Hóa đơn</a></li>
+                <li><a href="../customer"><i class="fa-solid fa-users"></i> Khách Hàng</a></li>
+                <li><a href="../employee"><i class="fa-solid fa-users"></i> Nhân viên</a></li>
+                <li><a href="../setting"><i class="fa-solid fa-gear"></i> Cài Đặt</a></li>
+                <li><a href="../report"><i class="fa fa-list-alt fa-fw"></i> Báo Cáo</a></li>
+            </ul>
+        </div>
+        <div class="page-wapper">
+            <div class="page-path"><a href="">Sản phẩm</a>/</div>
+            <div class="page-title"><h1>Danh Sách Sản Phẩm</h1></div>
+            <div class="two-column">
+                <div class="content-lenght">
+                <form action="index.php" method="get">
+                    Xem: <select onchange="this.form.submit()" name="choose" id="">
+                        <option <?php if($limit==4) echo "selected";?> value="4">4</option>
+                        <option <?php if($limit==6) echo "selected";?> value="6">6</option>
+                        <option <?php if($limit==8) echo "selected";?> value="8">8</option>
+                        <option <?php if($limit==10) echo "selected";?> value="10">10</option>
+                    </select>
+                    thông tin
+                    </form>
+                </div>
+            </div>
+            <div class="two-column">
+                <div class="page-search">
+                    <form action="">
+                    Tìm kiếm: <input type="search" placeholder="Nhập thông tin cần tìm" name="search" value=<?php echo $search;?>>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <a href="add.php">
+                <button class="btn btn-add">Thêm sản phẩm</button>
+                </a>
+            </div>
+            <div class="row page-table">
+                <table border="1" cellspacing ="0" width="100%">
+                    <thead>
 						<tr>
 							<th width="50px">STT</th>
-							<th>Tên Danh Mục</th>
+							<th>Tên</th>
+                            <th>Ảnh</th>
+                            <th>Giá</th>
+                            <th>Danh mục</th>
 							<th width="50px"></th>
 							<th width="50px"></th>
 						</tr>
 					</thead>
 					<tbody>
-<?php
-//Lay danh sach danh muc tu database
-$sql          = 'select * from category';
-$categoryList = executeResult($sql);
+                <?php
+                //Lay danh sach san pham tu database
+                $andSearch         = "and product.name like '%$search%'";
+                $sql = 'select product.id, product.name,product.price, product.img, category.name as category_name from product left join category on product.id = category.id where 1 '.$andSearch.' limit '.$firstIndex.','.
+                $limit;
 
-$index = 1;
-foreach ($categoryList as $item) {
-	echo '<tr>
-				<td>'.($index++).'</td>
-				<td>'.$item['name'].'</td>
-				<td>
-					<a href="add.php?id='.$item['id'].'"><button class="btn btn-warning">Sửa</button></a>
-				</td>
-				<td>
-					<button class="btn btn-danger" onclick="deleteCategory('.$item['id'].')">Xoá</button>
-				</td>
-			</tr>';
-}
-?>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+                $categoryList = executeResult($sql);
 
-	<script type="text/javascript">
-		function deleteCategory(id) {
+                foreach ($categoryList as $item) {
+                	echo '<tr>
+                				<td>'.(($firstIndex++ + 1)).'</td>
+                				<td>'.$item['name'].'</td>
+                                <td><img width="30px" height="30px" src="'.$item['img'].'"></td>
+                                <td>'.$item['price'].'</td>
+                                <td>'.$item['category_name'].'</td>
+                				<td>
+                					<a href="add.php?id='.$item['id'].'"><button class="btn btn-edit">Sửa</button></a>
+                				</td>
+                				<td>
+                                <a href="delete.php?id='.$item['id'].'">
+                					<button class="btn btn-delete" onclick="delete()">Xoá</button></a>
+                				</td>
+                			</tr>';
+                }
+                ?>
+                                    </tbody>
+                                </table>
+                                <ul class="pagination">
+                                    
+                <?php
+                    if($page>1) echo '<li class="page-item"><a href="?page='.($page-1).'&search='.$search.'&choose='.$limit.'" class="page-link">Previous</a></li>';
+                
+                    $avaiablePage=[1,$page,$number];
+                    for($i = 0;$i<$number;$i++){
+                        if(!in_array($i+1,$avaiablePage)) continue;
+                    if($page == $i+1)
+                        echo '<li class="page-item page-active"><a href="?page='.($i+1).'&search='.$search.'&choose='.$limit.'" class="page-link">'.($i+1).'</a></li>';
+                    else 
+                    echo '<li class="page-item"><a href="?page='.($i+1).'&search='.$search.'&choose='.$limit.'" class="page-link">'.($i+1).'</a></li>';
+                    }
+                
+                    if($page<$number) echo '<li class="page-item"><a href="?page='.($page+1).'&search='.$search.'&choose='.$limit.'" class="page-link">Next</a></li>'
+                ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+		function delete() {
 			var option = confirm('Bạn có chắc chắn muốn xoá danh mục này không?')
-			if(!option) {
-				return;
-			}
-
-			console.log(id)
-			//ajax - lenh post
-			$.post('ajax.php', {
-				'id': id,
-				'action': 'delete'
-			}, function(data) {
-				location.reload()
-			})
 		}
 	</script>
 </body>

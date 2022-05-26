@@ -19,7 +19,7 @@ if(isset($_GET['page'])){
 }
 $firstIndex = ($page-1)*$limit;
 if($page<1) $page =1;
-$sql_count = "select count(*) from customer where name like '%$search%'";
+$sql_count = "select count(*) from employee where name like '%$search%'";
 $countResult = executeSingleResult($sql_count);
 $count = $countResult['count(*)'];
 $number = ceil($count/$limit);
@@ -61,8 +61,8 @@ $number = ceil($count/$limit);
             </ul>
         </div>
         <div class="page-wapper">
-            <div class="page-path"><a href="">Quản lý khách hàng</a>/</div>
-            <div class="page-title"><h1>Quản Lý Khách Hàng</h1></div>
+            <div class="page-path"><a href="">Quản lý nhân viên</a>/</div>
+            <div class="page-title"><h1>Quản Lý Nhân Viên</h1></div>
             <div class="two-column">
                 <div class="content-lenght">
                     <form action="index.php" method="get">
@@ -85,7 +85,7 @@ $number = ceil($count/$limit);
             </div>
             <div class="row">
                 <a href="add.php">
-                <button class="btn btn-add">Thêm khách hàng</button>
+                <button class="btn btn-add">Thêm nhân viên</button>
                 </a>
             </div>
             <div class="row page-table">
@@ -93,12 +93,12 @@ $number = ceil($count/$limit);
                     <thead>
 						<tr>
 							<th width="50px">STT</th>
-							<th>Tên khách hàng</th>
+							<th>Tên nhân viên</th>
                             <th>Tài khoản</th>
                             <th>Mật khẩu</th>
                             <th>Số điện thoại</th>
-                            <th>Địa chỉ</th>
-                            <th>Hưởng khuyến mại</th>
+                            <th>Lương</th>
+                            <th>Chức vụ</th>
 							<th width="50px"></th>
 							<th width="50px"></th>
 						</tr>
@@ -107,7 +107,7 @@ $number = ceil($count/$limit);
                 <?php
                 //Lay danh sach danh muc tu database
                 $andSearch         = "and name like '%$search%'";
-                $sql = 'select * from customer where 1 '.$andSearch.'limit '.$firstIndex.','.$limit;
+                $sql = 'select * from employee where 1 '.$andSearch.'limit '.$firstIndex.','.$limit;
                 $categoryList = executeResult($sql);
 
                 foreach ($categoryList as $item) {
@@ -117,13 +117,9 @@ $number = ceil($count/$limit);
                                 <td>'.$item['user_name'].'</td>
                                 <td>'.$item['password'].'</td>
                                 <td>'.$item['phone'].'</td>
-                                <td>'.$item['address'].'</td>';
-                                if($item['sale_level']==1){
-                                    echo '<td>3%</td>';
-                                }
-                                else echo '<td>5%</td>';
-
-                				echo '<td>
+                                <td>'.$item['salary'].'</td>
+                                <td>'.$item['role'].'</td>
+                				<td>
                 					<a href="add.php?id='.$item['id'].'"><button class="btn btn-edit">Sửa</button></a>
                 				</td>
                 				<td>

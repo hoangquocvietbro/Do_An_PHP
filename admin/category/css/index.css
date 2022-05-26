@@ -93,13 +93,16 @@ a{
 .sidebar__nav a{
     color: coral;
     text-decoration: none;
+    width: 100%;
+    display: block;
 }
 
-.page-wapper{
+.page-wapper {
     width: 81%;
-    height: 726px;
+    height: calc(100vh - 92px);
     padding: 20px 2%;
-    background-color: rgb(236, 232, 232);}
+    background-color: rgb(236, 232, 232);
+}
 .page-path{
     width: 100%;
     height: 32px;
