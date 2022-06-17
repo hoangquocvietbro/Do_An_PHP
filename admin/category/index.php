@@ -1,8 +1,10 @@
 <?php
 require_once ('../../db/dbhelper.php');
 require_once ('../../session/session.php');
-$user = [];
-$user = (isset($_SESSION['user']))? $_SESSION['user']: [];
+if(!isset($_SESSION['user'])){
+    header("location: ../../login.php");
+}
+$user = $_SESSION['user'];
 
 //tìm kiếm
 $search = '';

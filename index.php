@@ -1,2 +1,3 @@
 <?php
-    header('Location: login.php');
+    header('location: login.php');
+?>

@@ -107,7 +107,8 @@ $number = ceil($count/$limit);
                 $andSearch         = "and product.name like '%$search%'";
                 $sql = 'select product.id, product.name,product.price, product.img, category.name as category_name from product left join category on product.id = category.id where 1 '.$andSearch.' limit '.$firstIndex.','.
                 $limit;
-
+                var_dump($sql);
+    
                 $categoryList = executeResult($sql);
 
                 foreach ($categoryList as $item) {
