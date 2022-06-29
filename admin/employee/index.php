@@ -88,10 +88,12 @@ $number = ceil($count/$limit);
                 				<td>'.$item['name'].'</td>
                                 <td>'.$item['user_name'].'</td>
                                 <td>'.$item['password'].'</td>
-                                <td>'.$item['phone'].'</td>
-                                <td>'.$item['salary'].'</td>
-                                <td>'.$item['role'].'</td>
-                				<td>
+                                <td>0'.$item['phone'].'</td>
+                                <td>'.$item['salary'].'</td>';
+                                if($item['role']==0) echo '<td>Quản lý</td>';
+                                if($item['role']==1) echo '<td>Thu ngân</td>';
+                                if($item['role']==2) echo '<td>Bồi bàn</td>';
+                				echo '<td>
                 					<a href="add.php?id='.$item['id'].'"><button class="btn btn-edit">Sửa</button></a>
                 				</td>
                 				<td>

@@ -85,8 +85,8 @@ $number = ceil($count/$limit);
                 	echo '<tr>
                 				<td>'.(($firstIndex++ + 1)).'</td>
                 				<td>'.$item['name'].'</td>
-                                <td><img width="30px" height="30px" src="'.$item['img'].'"></td>
-                                <td>'.$item['price'].'</td>
+                                <td><img width="30px" height="30px" src="../img/uploads/products/'.$item['img'].'"></td>
+                                <td>'.$item['price'].' VND</td>
                                 <td>'.$item['category_name'].'</td>
                 				<td>
                 					<a href="add.php?id='.$item['id'].'"><button class="btn btn-edit">Sửa</button></a>

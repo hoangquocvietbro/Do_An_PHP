@@ -87,7 +87,7 @@ $number = ceil($count/$limit);
                 				<td>'.$item['name'].'</td>
                                 <td>'.$item['user_name'].'</td>
                                 <td>'.$item['password'].'</td>
-                                <td>'.$item['phone'].'</td>
+                                <td>0'.$item['phone'].'</td>
                                 <td>'.$item['address'].'</td>';
                                 if($item['sale_level']==1){
                                     echo '<td>3%</td>';

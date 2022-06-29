@@ -93,17 +93,17 @@ if (isset($_GET['id'])) {
 
 					  <?php 
 					  if($role==1){
-                        echo '<option selected value =1>Quản lý</option>';
-                        echo '<option value = 2>Nhân viên</option>';
+                        echo '<option selected value =1>Nhân viên thu ngân</option>';
+                        echo '<option value = 2>Bồi bàn</option>';
                       }
 					  
 					  else if($role == 2) {
-                        echo '<option  value = "1">Quản lý</option>';
-                        echo '<option selected value ="2">Nhân viên</option>';
+                        echo '<option  value = "1">Nhân viên thu ngân</option>';
+                        echo '<option selected value ="2">Bồi bàn</option>';
                         }
                       else{
-                        echo '<option value = "1">Quản lý</option>';
-                        echo '<option value = "2">Nhân viên</option>';
+                        echo '<option value = "1">Nhân viên thu ngân</option>';
+                        echo '<option value = "2">Bồi bàn</option>';
                       }
 					  ?>
 
