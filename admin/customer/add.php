@@ -13,7 +13,7 @@ if (!empty($_POST)) {
 		$user_name = $_POST['user_name'];
 	}
 	if (isset($_POST['password'])) {
-		$password = $_POST['password'];
+		$password = password_hash($_POST['password'],PASSWORD_DEFAULT);
 	}
     if (isset($_POST['phone'])) {
 		$phone = $_POST['phone'];
