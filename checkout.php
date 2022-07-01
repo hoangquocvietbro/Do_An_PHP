@@ -3,10 +3,10 @@ $conn = mysqli_connect('localhost','root','','db_cookies_restaurant');
 mysqli_set_charset($conn,'utf8');
 require_once ('db/dbhelper.php');
 require_once ('session/session.php');
-if(!isset($_SESSION['user'])){
+if(!isset($_SESSION['customer'])){
     header("location: loginCustomer.php");
 }
-$user = $_SESSION['user'][0];
+$user = $_SESSION['customer'][0];
 $cart = (isset($_SESSION['cart']))? $_SESSION['cart']:[];
 if(isset($_POST["name"])){
     $name= $_POST["name"];
@@ -32,7 +32,13 @@ if(isset($_POST["customer_id"])){
             mysqli_query($conn,$sql);
         }
         unset($_SESSION['cart']);
-        header("Location: index.php");
+        echo "
+        <script language='javascript'>
+            alert('Mua hàng thành công');
+            window.open('index.php','_self', 1);
+        </script>
+    ";
+        //header("Location: index.php");
     }
 }
 

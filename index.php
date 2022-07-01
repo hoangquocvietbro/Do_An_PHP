@@ -39,6 +39,8 @@ if(isset($_GET['category_id'])){
         <div class="header-top"></div>
         <img class="header-banner" src="./src/img/cookie-spread.jpg" alt="">
         <img class="header-logo" src="./src/img/logo1.png" alt="">
+        <div class="login-btn"><a href="loginCustomer.php"><i class="fa fa-sign-in fa-fw"></i>Login</a></div>
+        <div class="logout-btn"><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i>Logout</a></div>
     </header>
     <div class="container">
         <div class="sidebar">

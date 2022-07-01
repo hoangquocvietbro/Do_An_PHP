@@ -15,6 +15,8 @@
             <input type="text" placeholder="Tên tài khoản " name = "email"/>
             <input type="password" placeholder="Mật khẩu" name ="password"/>
             <button>login</button>
+            <hr>
+            <a class="register-btn" href="register.php">Tạo tài khoản mới</a>
           </form>
         </div>
       </div>
@@ -34,7 +36,7 @@ if(isset($_POST['email'])){
       $checkPass = password_verify($password,$data[0]['password']);
 
       if($checkPass){
-      $_SESSION['user'] = $data;
+      $_SESSION['customer'] = $data;
       echo "Chào bạn";
       header('location: index.php?menu=checkout');
       }

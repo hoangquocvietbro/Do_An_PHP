@@ -31,6 +31,32 @@
     position: absolute;
     margin: auto;
 }
+.login-btn{
+    right: 10%;
+    top: 0;
+    line-height: 32px;
+    height: 32px;
+    position: absolute;
+    margin: auto; 
+}
+.login-btn a{
+    color:aliceblue;
+    font-size: 20px;
+    text-decoration: none;
+}
+.logout-btn{
+    right: 2%;
+    top: 0;
+    line-height: 32px;
+    height: 32px;
+    position: absolute;
+    margin: auto; 
+}
+.logout-btn a{
+    color:aliceblue;
+    font-size: 20px;
+    text-decoration: none;
+}
 .container{
     width: 100%;
 }
@@ -131,6 +157,7 @@
 }
 .list-category{
     list-style-position: inside;
+    list-style-type: none;
     margin: 16px 0;
     border: 5px solid #c9c5c5;
     border-radius: 5px;
@@ -141,6 +168,12 @@
     margin-top: 5px;
     font-size: 24px;
     text-decoration: none;
+}
+.list-category li{
+    margin-top: 5px;
+    font-size: 24px;
+    text-decoration: none;
+    padding-left: 16px;
 }
 .btn-viewMore{
     margin-top: 20px;

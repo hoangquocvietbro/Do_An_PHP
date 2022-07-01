@@ -47,8 +47,8 @@ $user = $_SESSION['user'];
                 <li><a href="../order"><i class="fa fa-list-alt fa-fw"></i> Hóa đơn</a></li>
                 <li><a href="../customer"><i class="fa-solid fa-users"></i> Khách Hàng</a></li>
                 <li><a href="../employee"><i class="fa-solid fa-id-badge"></i> Nhân viên</a></li>
-                <li><a href="../setting"><i class="fa-solid fa-gear"></i> Cài Đặt</a></li>
-                <li><a href="../report"><i class="fa fa-list-alt fa-fw"></i> Báo Cáo</a></li>
+                <!-- <li><a href="../setting"><i class="fa-solid fa-gear"></i> Cài Đặt</a></li> -->
+                <!-- <li><a href="../report"><i class="fa fa-list-alt fa-fw"></i> Báo Cáo</a></li> -->
             </ul>
         </div>
 </body>

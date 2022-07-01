@@ -127,7 +127,7 @@ $number = ceil($count/$limit);
     </div>
     <script type="text/javascript">
 		function deleteCategory() {
-			var option = confirm('Bạn có chắc chắn muốn xoá danh mục này không?')
+			var option = confirm('Bạn có chắc chắn muốn xoá nhân viên này không?')
 		}
 	</script>
 </body>

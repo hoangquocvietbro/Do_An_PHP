@@ -93,7 +93,7 @@ $number = ceil($count/$limit);
                 				</td>
                 				<td>
                                 <a href="delete.php?id='.$item['id'].'">
-                					<button class="btn btn-delete" onclick="delete()">Xoá</button></a>
+                					<button class="btn btn-delete" onclick="deleteCategory()">Xoá</button></a>
                 				</td>
                 			</tr>';
                 }
@@ -121,8 +121,8 @@ $number = ceil($count/$limit);
         </div>
     </div>
     <script type="text/javascript">
-		function delete() {
-			var option = confirm('Bạn có chắc chắn muốn xoá danh mục này không?')
+		function deleteCategory() {
+			var option = confirm('Bạn có chắc chắn muốn xoá sản phẩm này không?')
 		}
 	</script>
 </body>

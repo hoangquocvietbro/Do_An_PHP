@@ -1,0 +1,48 @@
+*{
+    background-color: #ffebcd;
+}
+h2{
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 32px;
+    margin-top: 64px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);}
+table,tr,td {
+    margin: auto;
+    background-color: white;
+    padding: 10;
+}
+table input,td,textarea{
+    background-color: white;
+}
+table{
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
+}
+button{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+.btn-register{
+    background: green;
+    width: 60%;
+}
+.btn-reset{
+    background: red;
+    width: 39%;
+}
+textarea{
+    height: 115px;
+    width: 318px;
+}

@@ -64,7 +64,7 @@ $mahd=$_GET['mahd'];
                   <td height="54"  >                    
                       <div align="left">
                         <?php		
-$sql1="select *,tb_order.id as idhd from tb_order left join customer ON '$mahd' = customer.id";
+$sql1="select * from tb_order left join customer ON tb_order.customer_id = customer.id where tb_order.id='$mahd' ";
 $row1 = executeSingleResult($sql1);
 ?>
                         <b>Thông tin Khách hàng:</b>                    </div>
